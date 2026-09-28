@@ -42,7 +42,14 @@ The original table was separated into one Fact table and two Dimension tables us
 ![Power BI Data Model](data-model.png.png)
 
 
-## 5. DAX Measures & Business Logic
+## 5. Assumptions and Business Rules
+To ensure consistent analysis, the following business rules and analytical assumptions were applied throughout the Power BI solution:
+
+*   **Currency Standardization:** All financial metrics are reported in Kenya Shillings (KES)[cite: 1]. Where monetary values lacked an explicit currency, they were assumed to be in KES[cite: 1]. For explicit foreign currencies, the following fixed exchange rates were applied via Power Query: 1 USD = 130 KES; 1 EUR/GBP (?) = 170 KES; 1 ZAR (R) = 7 KES.
+*   **Revenue Definition:** The provided `Revenue Recorded` field contained calculation errors and unapplied discounts. True revenue was defined and calculated explicitly via DAX as: `(Clean Unit Selling Price * (1 - Discount)) * Units Sold`[cite: 1].
+*   **Cost Definition:** Total cost was defined as the aggregate of the base vehicle cost (`Clean Unit Cost` * `Units Sold`), `Clean Logistics Cost`, and `Clean Delivery Fee`[cite: 1].
+*   **Missing Values:** Text placeholders such as "missing", "TBD", and Excel `#VALUE!` errors in financial columns were treated as zero (0) to maintain data model integrity without dropping the entire transaction record[cite: 1].
+*   **Missing Dates:** Transactions with null or missing delivery dates were retained, as they represent pending deliveries or administrative holdups rather than invalid data.
 
 
 ## 6. Key Insights & Recommendations
