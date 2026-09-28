@@ -39,7 +39,7 @@ The original table was separated into one Fact table and two Dimension tables us
 * A **One-to-Many (1:*)** relationship was established between `Dim_Vehicle[Car Model]` and `Fact_Sales[Car Model]`.
 * Cross-filter direction was set to **Single** (Dimension filtering Fact) to prevent ambiguous filter contexts and optimize model performance.
 
-
+![Power BI Data Model](data-model.png.png)
 
 
 ## 5. DAX Measures & Business Logic
