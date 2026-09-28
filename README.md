@@ -25,7 +25,21 @@ To standardize all financial data to Kenya Shillings (KES) as required by manage
 A critical validation check was performed by comparing the company's `Revenue Recorded` column against a mathematical calculation of true revenue (`Clean Unit Selling Price` * (1 - `Discount`) * `Units Sold`). 
 * **Finding:** The recorded revenue contains significant discrepancies and negative error values, making it unreliable for management reporting. Moving forward, explicit DAX measures will be used to calculate true revenue and profitability.
 
-## 4. Data Modeling
+
+## 4. Analytical Data Modeling (Star Schema)
+The original dataset was provided as a raw flat table. To support efficient querying and time-based analysis, the flat file was transformed into a **Star Schema** analytical data model. 
+
+The original table was separated into one Fact table and two Dimension tables using Power Query:
+* **Dim_Location:** Created by referencing the main query, isolating geographic/branch columns (`Region`, `County`, `City`, `Branch`), and removing duplicates based on the `Branch` column to establish a unique primary key.
+* **Dim_Vehicle:** Created by referencing the main query, isolating vehicle attributes (`Car Make`, `Car Model`, `Vehicle Type`, `Vehicle Year`, `Fuel Type`, `Transmission`), and removing duplicates based on `Car Model` to create a unique catalog of inventory.
+* **Fact_Sales:** The main query was retained as the fact table, holding all transactional data, measurable values (Units Sold, Cleaned Monetary values), and foreign keys (`Branch`, `Car Model`).
+
+**Relationships and Cardinality:**
+* A **One-to-Many (1:*)** relationship was established between `Dim_Location[Branch]` and `Fact_Sales[Branch]`.
+* A **One-to-Many (1:*)** relationship was established between `Dim_Vehicle[Car Model]` and `Fact_Sales[Car Model]`.
+* Cross-filter direction was set to **Single** (Dimension filtering Fact) to prevent ambiguous filter contexts and optimize model performance.
+
+
 
 
 ## 5. DAX Measures & Business Logic
