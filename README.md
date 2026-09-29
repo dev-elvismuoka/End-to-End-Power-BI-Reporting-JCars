@@ -53,3 +53,15 @@ To ensure consistent analysis, the following business rules and analytical assum
 
 
 ## 6. Key Insights & Recommendations
+
+### Top 5 Business Insights
+1. **Revenue Recording Inaccuracies:** The most critical finding from the data validation phase is that the manually entered `Revenue Recorded` column is highly unreliable. It frequently fails to account for applied discounts and contains raw data entry errors, resulting in severe discrepancies compared to true mathematical revenue.
+2. **Margin Erosion via Logistics:** While certain heavy vehicle types (like SUVs and Trucks) generate high gross revenue, their proportional logistics and delivery costs are significantly higher than sedans, heavily eroding their final Gross Profit Margin.
+3. **Branch Performance Variances:** Through drill-through analysis, it is evident that top-performing geographic branches drive the majority of sales volume, but smaller regional branches suffer from disproportionately high unit logistics costs.
+4. **Currency Volatility Exposure:** With sales transactions occurring in mixed currencies (USD, EUR, ZAR, KES), the company's true revenue in KES is highly exposed to exchange rate fluctuations.
+5. **Customer Satisfaction Correlation:** Initial drill-down analysis indicates a potential correlation between high logistics costs/complex deliveries and fluctuations in the Average Customer Rating, suggesting that delivery friction impacts the customer experience.
+
+### Top 3 Strategic Recommendations
+1. **Automate Point-of-Sale Calculations:** JCars Logistics must immediately configure their CRM/Sales software to automatically calculate final revenue at the point of sale (Price × Units - Discount) rather than allowing sales reps to manually type in the final revenue number. This will eliminate the negative error values and `#VALUE!` discrepancies found in the dataset.
+2. **Revise Logistics Pricing for Heavy Vehicles:** Management should review the delivery fee structure for larger vehicle types. Passing a slightly higher percentage of the logistics cost to the customer for these specific vehicles will protect the Gross Profit Margin.
+3. **Implement a Unified Base Currency Policy:** To simplify financial reporting and protect against currency volatility, JCars should standardize all regional sales price lists to a single base currency (KES), or implement a dynamic, daily-updated exchange rate multiplier in their backend system rather than relying on static conversions.
